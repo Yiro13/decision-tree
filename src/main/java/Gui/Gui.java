@@ -20,6 +20,7 @@ public class Gui extends javax.swing.JFrame {
      */
     Arbol a = new Arbol();
     int numList = 0;
+    ArrayList<Integer> listaRespuestas = new ArrayList();
     
     public Gui() {
         initComponents();
@@ -368,6 +369,8 @@ public class Gui extends javax.swing.JFrame {
 
     private void comenzarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comenzarButtonActionPerformed
         a.crearArbol();
+        listaRespuestas.clear();
+        diagnosticoField.setText("");
 
         numList = 0;
         if(a.getTamanio() == numList){
@@ -375,31 +378,41 @@ public class Gui extends javax.swing.JFrame {
         }else{
             String sintoma = a.getNodo(numList).getSintoma();
             diagnosticoFieldPreguntas.setText("Tienes " + sintoma + "?");
-            System.out.print(sintoma);
         }
     }//GEN-LAST:event_comenzarButtonActionPerformed
 
     private void diagnosticoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diagnosticoButtonActionPerformed
+        
         String opcion = diagnosticoBox.getSelectedItem().toString();
+        if(a.getTamanio() == 0){
+            return;
+        }
         if(opcion.equals("Si")){
-            String resultado = a.getNodo(numList).getEnfermedad();
             if(numList < a.getTamanio() - 1){
                 numList++;
                 String sintoma = a.getNodo(numList).getSintoma();
                 diagnosticoFieldPreguntas.setText("Tienes " + sintoma + "?");
+                listaRespuestas.add(1);
             }else {
+                listaRespuestas.add(1);
                 diagnosticoFieldPreguntas.setText("");
-                diagnosticoField.setText("Tienes " + resultado);
+                numList++;
             }
+            
         }else {
             if(numList < a.getTamanio() - 1){
                 numList++;
                 String sintoma = a.getNodo(numList).getSintoma();
                 diagnosticoFieldPreguntas.setText("Tienes " + sintoma + "?");
+                listaRespuestas.add(2);
             }else {
+                listaRespuestas.add(2);
                 diagnosticoFieldPreguntas.setText("");
-                diagnosticoField.setText("No tienes nada");
+                numList++;
             }
+        }
+        if(numList == a.getTamanio()){
+            diagnosticoField.setText(a.clasificar(listaRespuestas));
         }
     }//GEN-LAST:event_diagnosticoButtonActionPerformed
 

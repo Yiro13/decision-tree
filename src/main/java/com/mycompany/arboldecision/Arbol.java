@@ -50,5 +50,18 @@ public class Arbol {
     public ArrayList getLista(){
         return lista;
     }
+    
+    public String clasificar(ArrayList<Integer> listaRespuestas){
+        String enfermedad = "Nada";
+        int i = 0;
+        for(int respuesta : listaRespuestas){
+            Nodo nodo = getNodo(i);
+            if(respuesta == 1){
+                enfermedad = nodo.mapEnfermedad.get("1");
+            }
+            i++;
+        }
+        return enfermedad;
+    }
    
 }

@@ -16,7 +16,5 @@ public class ArbolDecision {
         Gui gui = new Gui();
         gui.setVisible(true);
         gui.setLocationRelativeTo(null);
-        /*Arbol a = new Arbol();
-        a.Menu();*/
     }
 }
