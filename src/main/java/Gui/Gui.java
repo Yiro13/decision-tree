@@ -152,6 +152,11 @@ public class Gui extends javax.swing.JFrame {
         diagnosticoButton.setBackground(new java.awt.Color(102, 255, 102));
         diagnosticoButton.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         diagnosticoButton.setText("Evaluar");
+        diagnosticoButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                diagnosticoButtonActionPerformed(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Resultado:");
@@ -370,9 +375,33 @@ public class Gui extends javax.swing.JFrame {
         }else{
             String sintoma = a.getNodo(numList).getSintoma();
             diagnosticoFieldPreguntas.setText("Tienes " + sintoma + "?");
-            //System.out.print(sintoma);
+            System.out.print(sintoma);
         }
     }//GEN-LAST:event_comenzarButtonActionPerformed
+
+    private void diagnosticoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diagnosticoButtonActionPerformed
+        String opcion = diagnosticoBox.getSelectedItem().toString();
+        if(opcion.equals("Si")){
+            String resultado = a.getNodo(numList).getEnfermedad();
+            if(numList < a.getTamanio() - 1){
+                numList++;
+                String sintoma = a.getNodo(numList).getSintoma();
+                diagnosticoFieldPreguntas.setText("Tienes " + sintoma + "?");
+            }else {
+                diagnosticoFieldPreguntas.setText("");
+                diagnosticoField.setText("Tienes " + resultado);
+            }
+        }else {
+            if(numList < a.getTamanio() - 1){
+                numList++;
+                String sintoma = a.getNodo(numList).getSintoma();
+                diagnosticoFieldPreguntas.setText("Tienes " + sintoma + "?");
+            }else {
+                diagnosticoFieldPreguntas.setText("");
+                diagnosticoField.setText("No tienes nada");
+            }
+        }
+    }//GEN-LAST:event_diagnosticoButtonActionPerformed
 
     /**
      * @param args the command line arguments

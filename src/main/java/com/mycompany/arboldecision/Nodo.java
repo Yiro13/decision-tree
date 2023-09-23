@@ -27,6 +27,10 @@ public class Nodo {
         return sintoma;
     }
     
+    public String getEnfermedad(){
+        return mapEnfermedad.get("1");
+    }
+    
     public Map getMapaNodo(){
         return mapNodo;
     }
